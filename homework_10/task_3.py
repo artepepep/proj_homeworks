@@ -9,7 +9,7 @@ for player in players:
         score = randint(1, 1000)
         score_players.append((player, score))
 
-with open('score_players.csv', 'w') as csvfile:
+with open('score_players.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['Player name', 'Score'])
     writer.writerows(score_players)
