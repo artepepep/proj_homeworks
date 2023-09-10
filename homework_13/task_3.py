@@ -11,7 +11,7 @@ class Auto:
         self.speed = max(0, self.speed)
     def display_speed(self):
         print(f'The current speed of {self.brand} {self.model} is {self.speed}')
-
+        
 car = Auto("porshce", "911 turbo s", 2017)
 car.brake()
 car.display_speed()
