@@ -1,46 +1,46 @@
--- CREATE TABLE Users (
---   user_id SERIAL PRIMARY KEY,
---   username VARCHAR(255),
---   email VARCHAR(255),
---   password VARCHAR(255),
---   user_type VARCHAR(50)
--- );
+CREATE TABLE Users (
+  user_id SERIAL PRIMARY KEY,
+  username VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255),
+  user_type VARCHAR(50)
+);
 
--- CREATE TABLE Hosts (
---   host_id SERIAL PRIMARY KEY,
---   user_id INT,
---   rate INT,
---   FOREIGN KEY (user_id) REFERENCES Users(user_id)
--- );
+CREATE TABLE Hosts (
+  host_id SERIAL PRIMARY KEY,
+  user_id INT,
+  rate INT,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
 
--- CREATE TABLE Guests (
---   guest_id SERIAL PRIMARY KEY,
---   user_id INT,
---   FOREIGN KEY (user_id) REFERENCES Users(user_id)
--- );
+CREATE TABLE Guests (
+  guest_id SERIAL PRIMARY KEY,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
 
--- CREATE TABLE Rooms (
---   room_id SERIAL PRIMARY KEY,
---   host_id INT,
---   room_name VARCHAR(255),
---   description TEXT,
---   maximum_residents INT,
---   price_per_night INT,
---   review VARCHAR(255),
---   FOREIGN KEY (host_id) REFERENCES Hosts(host_id)
--- );
+CREATE TABLE Rooms (
+  room_id SERIAL PRIMARY KEY,
+  host_id INT,
+  room_name VARCHAR(255),
+  description TEXT,
+  maximum_residents INT,
+  price_per_night INT,
+  review VARCHAR(255),
+  FOREIGN KEY (host_id) REFERENCES Hosts(host_id)
+);
 
--- CREATE TABLE Reservations (
---   reservation_id SERIAL PRIMARY KEY,
---   guest_id INT,
---   room_id INT,
---   check_in_date DATE,
---   check_out_date DATE,
---   total_price INT,
---   payment VARCHAR(255),
---   FOREIGN KEY (guest_id) REFERENCES Guests(guest_id),
---   FOREIGN KEY (room_id) REFERENCES Rooms(room_id)
--- );
+CREATE TABLE Reservations (
+  reservation_id SERIAL PRIMARY KEY,
+  guest_id INT,
+  room_id INT,
+  check_in_date DATE,
+  check_out_date DATE,
+  total_price INT,
+  payment VARCHAR(255),
+  FOREIGN KEY (guest_id) REFERENCES Guests(guest_id),
+  FOREIGN KEY (room_id) REFERENCES Rooms(room_id)
+);
 
 INSERT INTO Users (user_id, username, email, password, user_type)
 VALUES
