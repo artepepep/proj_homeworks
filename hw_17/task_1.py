@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, func
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -62,3 +62,22 @@ english_students = (
 
 for student in english_students:
     print(student.name)
+
+average_students_per_subject = (
+    session.query(
+        StudentSubject.subject_id,
+        func.count(StudentSubject.student_id).label("student_count")
+    )
+    .group_by(StudentSubject.subject_id)
+    .subquery()
+)
+
+subjects_with_more_students = (
+    session.query(Subject)
+    .join(average_students_per_subject, Subject.id == average_students_per_subject.c.subject_id)
+    .filter(average_students_per_subject.c.student_count > func.avg(average_students_per_subject.c.student_count))
+    .all()
+)
+
+for subject in subjects_with_more_students:
+    print(subject.name)
